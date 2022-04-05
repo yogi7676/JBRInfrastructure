@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:jbr_infrastructure/app/helpers/app_constants.dart';
 import 'package:jbr_infrastructure/app/helpers/images.dart';
-import 'package:jbr_infrastructure/app/utils/screens/home/widgets/house_details.dart';
+import 'package:jbr_infrastructure/app/utils/screens/home/widgets/card_widget.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/custom_carousel_slider.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/custom_iconbutton.dart';
-import 'package:jbr_infrastructure/app/utils/widgets/custom_listview.dart';
-import 'package:jbr_infrastructure/app/utils/widgets/custom_navigation.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/custom_text.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/space.dart';
 
@@ -142,153 +140,19 @@ class Home extends StatelessWidget {
           const Space(
             height: 20,
           ),
-
           // Residential Rental Properties
-          const CustomText(
-            text: 'Residential Rental Properties',
-            size: 16,
-            weight: FontWeight.bold,
-          ),
-          const Space(
-            height: 20,
-          ),
-          SizedBox(
-            height: 300,
-            width: MediaQuery.of(context).size.width - 40,
-            child: CustomListview(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: List.generate(5, (index) {
-                  return GestureDetector(
-                    onTap: () => pushToStack(context, const HouseDetails()),
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      width: 320,
-                      child: Column(
-                        children: [
-                          Stack(
-                            alignment: Alignment.topRight,
-                            children: [
-                              CustomImage(
-                                  imageUrl: AppImages.url,
-                                  height: 200,
-                                  borderRadius: BorderRadius.circular(15),
-                                  width: 300),
-                              CustomIconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    FontAwesome.heart_o,
-                                    color: Colors.grey,
-                                  )),
-                            ],
-                          ),
-                          const Space(
-                            height: 20,
-                          ),
-                          Row(
-                            children: const [
-                              Flexible(
-                                child: CustomText(
-                                    overflow: TextOverflow.ellipsis,
-                                    text:
-                                        '#11/3,8th cross, chennakeshava nagar, hosa road, bangalore -560100'),
-                              ),
-                              Space(),
-                              CustomText(
-                                text: AppConstants.rupee + ' 8000 / month',
-                                weight: FontWeight.bold,
-                                size: 16,
-                              )
-                            ],
-                          ),
-                          const Space(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        FontAwesome.home,
-                                        color: AppConstants.grey,
-                                        size: 15,
-                                      ),
-                                      const Space(),
-                                      CustomText(
-                                        text: '3 BHK',
-                                        weight: FontWeight.w600,
-                                        color: AppConstants.grey,
-                                        size: 12,
-                                      )
-                                    ],
-                                  ),
-                                  const Space(),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.crop_square,
-                                        color: AppConstants.grey,
-                                        size: 15,
-                                      ),
-                                      const Space(
-                                        width: 5,
-                                      ),
-                                      CustomText(
-                                        text: '1200 sqft',
-                                        color: AppConstants.grey,
-                                        weight: FontWeight.w600,
-                                        size: 13,
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              CustomText(
-                                text: AppConstants.rupee + ' 9000',
-                                textDecoration: TextDecoration.lineThrough,
-                                weight: FontWeight.w600,
-                                color: AppConstants.grey,
-                                size: 13,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                })),
-          ),
+          const CardWidget(
+              forSale: false, title: 'Residential Rental Properties'),
+
+          //pg hostels
+          const CardWidget(forSale: false, title: 'PG Hostels'),
 
           // Residential Properties for sale
-          const CustomText(
-            text: 'Residential Properties',
-            size: 16,
-            weight: FontWeight.bold,
-          ),
-          const Space(
-            height: 20,
-          ),
+          const CardWidget(forSale: true, title: 'Residential Properties'),
 
-          // Pg hostels
-          const CustomText(
-            text: 'PG Hostels',
-            size: 16,
-            weight: FontWeight.bold,
-          ),
-          const Space(
-            height: 20,
-          ),
-
+          // Commercial Properties for sale
           // Residential Properties for sale
-          const CustomText(
-            text: 'Commercial Properties',
-            size: 16,
-            weight: FontWeight.bold,
-          ),
-          const Space(
-            height: 20,
-          ),
+          const CardWidget(forSale: true, title: 'Commercial Properties'),
         ]),
       ),
     );

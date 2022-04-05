@@ -42,7 +42,7 @@ class Profile extends StatelessWidget {
                       height: 110,
                       width: 110,
                       decoration: BoxDecoration(
-                          color: Colors.amber,
+                          color: Colors.blue,
                           image: const DecorationImage(
                               image: AssetImage(AppImages.house),
                               fit: BoxFit.cover),

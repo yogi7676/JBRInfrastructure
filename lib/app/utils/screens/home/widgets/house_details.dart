@@ -30,10 +30,11 @@ class HouseDetails extends StatelessWidget {
             children: [
               // image carousel
               CustomCarouselSlider(
+                  height: 250,
                   items: List.generate(
-                      5,
+                      AppImages.list.length,
                       (index) => CustomImage(
-                          imageUrl: AppImages.url,
+                          imageUrl: AppImages.list[index],
                           borderRadius: BorderRadius.circular(10),
                           height: 200,
                           width: MediaQuery.of(context).size.width))),
