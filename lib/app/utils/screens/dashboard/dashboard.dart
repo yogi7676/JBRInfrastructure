@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbr_infrastructure/app/utils/screens/profile/profile.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -66,7 +67,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      screens: const [Home(), Scaffold(), Scaffold(), Scaffold()],
+      screens: const [Home(), Scaffold(), Scaffold(), Profile()],
       items: _navBarsItems(),
       controller: persistentTabController,
       confineInSafeArea: true,

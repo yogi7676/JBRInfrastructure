@@ -40,6 +40,8 @@ dependencies:
   firebase_auth: ^3.3.12
   persistent_bottom_nav_bar: ^4.0.2
   flutter_vector_icons: ^1.0.0
+  carousel_slider: ^4.0.0
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:

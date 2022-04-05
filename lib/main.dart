@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jbr_infrastructure/app/controller/profilecontroller.dart';
 import 'package:jbr_infrastructure/app/helpers/app_constants.dart';
 import 'package:jbr_infrastructure/app/utils/screens/dashboard/dashboard.dart';
 import 'app/helpers/noglowbehaviour.dart';
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(ProfileController());
   runApp(const JBRInfrastructure());
 }
 
