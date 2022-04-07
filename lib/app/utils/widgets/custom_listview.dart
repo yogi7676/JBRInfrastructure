@@ -5,13 +5,15 @@ class CustomListview extends StatelessWidget {
   final Axis? scrollDirection;
   final ScrollPhysics? physics;
   final List<Widget> children;
+  final EdgeInsets? padding;
   const CustomListview(
       {Key? key,
       this.shrinkWrap,
       this.reverse,
       this.scrollDirection,
       this.physics,
-      required this.children})
+      required this.children,
+      this.padding})
       : super(key: key);
 
   @override
@@ -21,6 +23,7 @@ class CustomListview extends StatelessWidget {
       physics: physics ?? const BouncingScrollPhysics(),
       scrollDirection: scrollDirection ?? Axis.vertical,
       reverse: reverse ?? false,
+      padding: padding ?? const EdgeInsets.only(left: 20),
       children: children,
     );
   }

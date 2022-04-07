@@ -27,6 +27,10 @@ class AppImages {
     'https://mediacdn.99acres.com/media1/17477/8/349548332O-1647174293943.jpg',
     'https://mediacdn.99acres.com/media1/17477/8/349548334O-1647174293943.jpg',
     'https://mediacdn.99acres.com/media1/17477/8/349548336O-1647174293944.jpg',
-    'https://mediacdn.99acres.com/media1/17477/8/349548344O-1647174293945.jpg'
+    'https://mediacdn.99acres.com/media1/17477/8/349548344O-1647174293945.jpg',
+    'https://mediacdn.99acres.com/media1/17477/8/349548330O-1647174293943.jpg',
+    'https://mediacdn.99acres.com/media1/17477/8/349548332O-1647174293943.jpg',
+    'https://mediacdn.99acres.com/media1/17477/8/349548334O-1647174293943.jpg',
+    'https://mediacdn.99acres.com/media1/17477/8/349548336O-1647174293944.jpg',
   ];
 }

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jbr_infrastructure/app/controller/profilecontroller.dart';
 import 'package:jbr_infrastructure/app/helpers/app_constants.dart';
+import 'package:jbr_infrastructure/app/helpers/firebase.dart';
 import 'package:jbr_infrastructure/app/utils/screens/dashboard/dashboard.dart';
 import 'app/helpers/noglowbehaviour.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(ProfileController());
+  await initialization.then((value) {
+    Get.put(ProfileController());
+  });
+
   runApp(const JBRInfrastructure());
 }
 

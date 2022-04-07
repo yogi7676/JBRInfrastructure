@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jbr_infrastructure/app/utils/screens/profile/profile.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:iconly/iconly.dart';
 
 import '../../../helpers/app_constants.dart';
 import '../home/home.dart';
@@ -26,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(
-          Feather.grid,
+          IconlyLight.category,
           size: 20,
         ),
         title: "Discover",
@@ -35,7 +35,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(
-          FontAwesome.heart_o,
+          IconlyLight.heart,
           size: 20,
         ),
         title: 'Favorites',
@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(
-          FontAwesome5Regular.comment_dots,
+          IconlyLight.chat,
           size: 20,
         ),
         title: 'Inbox',
@@ -53,7 +53,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(
-          Icons.person_outlined,
+          IconlyLight.profile,
           size: 20,
         ),
         title: 'Profile',

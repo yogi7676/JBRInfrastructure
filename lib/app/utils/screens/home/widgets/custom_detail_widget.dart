@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:iconly/iconly.dart';
+import 'package:jbr_infrastructure/app/models/productmodel.dart';
 
 import '../../../../helpers/app_constants.dart';
 import '../../../widgets/custom_text.dart';
@@ -7,7 +9,10 @@ import '../../../widgets/space.dart';
 
 class CustomDetailWidget extends StatelessWidget {
   final bool forSale;
-  const CustomDetailWidget({Key? key, required this.forSale}) : super(key: key);
+  final ProductModel productModel;
+  const CustomDetailWidget(
+      {Key? key, required this.forSale, required this.productModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,8 @@ class CustomDetailWidget extends StatelessWidget {
                   children: [
                     TextSpan(text: forSale ? 'Price : ' : AppConstants.rupee),
                     TextSpan(
-                        text: '${(forSale) ? AppConstants.rupee : ''} 80000'),
+                        text:
+                            '${(forSale) ? AppConstants.rupee : ''} ${productModel.offerPrice}'),
                     !forSale
                         ? TextSpan(
                             text: ' /mth',
@@ -41,7 +47,9 @@ class CustomDetailWidget extends StatelessWidget {
             ),
             if (!forSale)
               CustomText(
-                text: AppConstants.rupee + ' 90000',
+                text: AppConstants.rupee +
+                    ' ' +
+                    productModel.originalPrice!.toString(),
                 textDecoration: TextDecoration.lineThrough,
                 weight: FontWeight.w600,
                 color: AppConstants.grey,
@@ -50,10 +58,10 @@ class CustomDetailWidget extends StatelessWidget {
           ],
         ),
         const Space(),
-        const CustomText(
+        CustomText(
             overflow: TextOverflow.ellipsis,
             size: 12,
-            text: '#11/3,8th cross, C.K nagar, hosa road, bangalore -560100'),
+            text: productModel.address!),
         const Space(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,13 +69,15 @@ class CustomDetailWidget extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  forSale ? FontAwesome.building : FontAwesome.home,
+                  forSale ? FontAwesome5Regular.building : IconlyLight.home,
                   color: AppConstants.grey,
                   size: 15,
                 ),
                 const Space(),
                 CustomText(
-                  text: '3 Floors',
+                  text: (productModel.floors == 0
+                      ? 'Ground'
+                      : '${productModel.floors} Floors'),
                   weight: FontWeight.w600,
                   color: AppConstants.grey,
                   size: 12,
@@ -85,7 +95,7 @@ class CustomDetailWidget extends StatelessWidget {
                   width: 5,
                 ),
                 CustomText(
-                  text: '1200 sqft',
+                  text: productModel.sqft.toString() + ' sqft',
                   color: AppConstants.grey,
                   weight: FontWeight.w600,
                   size: 13,

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:iconly/iconly.dart';
 import 'package:jbr_infrastructure/app/helpers/app_constants.dart';
 import 'package:jbr_infrastructure/app/helpers/images.dart';
 import 'package:jbr_infrastructure/app/utils/screens/home/widgets/card_widget.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/custom_carousel_slider.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/custom_iconbutton.dart';
+import 'package:jbr_infrastructure/app/utils/widgets/custom_listview.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/custom_text.dart';
 import 'package:jbr_infrastructure/app/utils/widgets/space.dart';
 
+import '../../../helpers/firebase.dart';
 import '../../widgets/custom_image.dart';
 
 class Home extends StatelessWidget {
@@ -15,6 +17,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> categoryList = [
+      "Rent House",
+      "Flat",
+      "PG",
+      "Commercial",
+      "Plot",
+      "Residential Property"
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const CustomText(
@@ -28,7 +38,7 @@ class Home extends StatelessWidget {
           CustomIconButton(
               onPressed: () {},
               icon: Icon(
-                Feather.bell,
+                IconlyLight.notification,
                 color: AppConstants.black,
               ))
         ],
@@ -36,12 +46,14 @@ class Home extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
-        padding: const EdgeInsets.only(top: 20) +
-            const EdgeInsets.symmetric(horizontal: 20),
+        /* padding: const EdgeInsets.only(top: 20) +
+            const EdgeInsets.symmetric(horizontal: 20),*/
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           // search container
           Container(
             height: 150,
+            margin: const EdgeInsets.only(top: 20) +
+                const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: AppConstants.blue,
               borderRadius: BorderRadius.circular(15),
@@ -97,13 +109,13 @@ class Home extends StatelessWidget {
                               hintStyle:
                                   TextStyle(color: AppConstants.lightGrey),
                               prefixIcon: Icon(
-                                Feather.search,
+                                IconlyLight.search,
                                 color: AppConstants.lightGrey,
                               ),
                               suffixIcon: IconButton(
                                   onPressed: () {},
                                   icon: Icon(
-                                    FontAwesome.sliders,
+                                    IconlyLight.filter,
                                     color: AppConstants.lightGrey,
                                   ))),
                         ))
@@ -115,14 +127,40 @@ class Home extends StatelessWidget {
             ),
           ),
           const Space(
-            height: 40,
+            height: 20,
           ),
-
+          // categories
+          SizedBox(
+            height: 40,
+            child: CustomListview(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: List.generate(categoryList.length, (index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                        color: AppConstants.backgroundColor,
+                        borderRadius: BorderRadius.circular(50)),
+                    child: CustomText(
+                      text: categoryList[index],
+                      color: AppConstants.grey,
+                    ),
+                  );
+                })),
+          ),
+          const Space(
+            height: 20,
+          ),
           // best offers
-          const CustomText(
-            text: 'Best Offers',
-            size: 16,
-            weight: FontWeight.bold,
+          const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: CustomText(
+              text: 'Best Offers',
+              size: 16,
+              weight: FontWeight.bold,
+            ),
           ),
           const Space(
             height: 20,
@@ -141,18 +179,66 @@ class Home extends StatelessWidget {
             height: 20,
           ),
           // Residential Rental Properties
-          const CardWidget(
-              forSale: false, title: 'Residential Rental Properties'),
+          CardWidget(
+              forSale: false,
+              title: 'Residential Rental Properties',
+              stream: firebaseFirestore
+                  .collection('products')
+                  .where('type', isEqualTo: 'renthouse')
+                  .snapshots()),
 
           //pg hostels
-          const CardWidget(forSale: false, title: 'PG Hostels'),
+          CardWidget(
+              forSale: false,
+              title: 'PG Hostels',
+              stream: firebaseFirestore
+                  .collection('products')
+                  .where('type', isEqualTo: 'pg')
+                  .snapshots()),
+
+          // plots
+          const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: CustomText(
+              text: 'Residential Site',
+              size: 16,
+              weight: FontWeight.bold,
+            ),
+          ),
+          const Space(
+            height: 20,
+          ),
+          CustomCarouselSlider(
+              height: 150,
+              viewFraction: 0.8,
+              items: List.generate(
+                  AppImages.plt.length,
+                  (index) => CustomImage(
+                      imageUrl: AppImages.plt[index],
+                      borderRadius: BorderRadius.circular(10),
+                      height: 150,
+                      width: MediaQuery.of(context).size.width))),
+          const Space(
+            height: 20,
+          ),
 
           // Residential Properties for sale
-          const CardWidget(forSale: true, title: 'Residential Properties'),
+          CardWidget(
+              forSale: true,
+              title: 'Residential Properties',
+              stream: firebaseFirestore
+                  .collection('products')
+                  .where('type', isEqualTo: 'building')
+                  .snapshots()),
 
           // Commercial Properties for sale
-          // Residential Properties for sale
-          const CardWidget(forSale: true, title: 'Commercial Properties'),
+          CardWidget(
+              forSale: true,
+              title: 'Commercial Properties',
+              stream: firebaseFirestore
+                  .collection('products')
+                  .where('type', isEqualTo: '')
+                  .snapshots()),
         ]),
       ),
     );
